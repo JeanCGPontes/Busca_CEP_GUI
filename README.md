@@ -1,4 +1,4 @@
-# Busca CEP GUI
+## Busca CEP GUI
 
 Neste programa Python, temos como **input** o CEP, 
 e como **output** a rua, o bairro, a cidade e o estado. 
