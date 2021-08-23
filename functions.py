@@ -30,17 +30,17 @@ def returned_objects(parsing_response):
 
 
 def validation_cep(cep_number):
-    if len(cep_number) == 8:
-        try:
-            cep_number = int(cep_number)
-            if cep_number:
-                return cep_number
+    try:
+        cep_number = int(cep_number)
+        cep_number = str(cep_number)
+        if len(cep_number) == 8:
+            return cep_number
 
-        except ValueError:
-            return 'Digite apenas números!'
+        elif len(cep_number) <= 8:
+            return 'Digite 8 números!'
 
-    elif len(cep_number) <= 8:
-        return 'Digite 8 números!'
+        elif len(cep_number) >= 8:
+            return 'Digite apenas 8 números!'
 
-    elif len(cep_number) >= 8:
-        return 'Digite apenas 8 números!'
+    except ValueError:
+        return 'Digite apenas números!'
