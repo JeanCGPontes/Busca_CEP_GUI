@@ -3,6 +3,7 @@ import json
 import requests
 
 URL = "https://viacep.com.br/ws/{}/json/"
+REGEX101 = r"\b\d{8}\b"
 
 
 def get_response_via_cep(cep_number):
