@@ -59,18 +59,5 @@ def get_state(json):
     return brazilian_states[json["uf"]]
 
 
-def validation_cep(cep_number):
-    try:
-        cep_number = int(cep_number)
-        cep_number = str(cep_number)
-        if len(cep_number) == 8:
-            return cep_number
-
-        elif len(cep_number) <= 8:
-            return 'Digite 8 números!'
-
-        elif len(cep_number) >= 8:
-            return 'Digite apenas 8 números!'
-
-    except ValueError:
-        return 'Digite apenas números!'
+def get_acronym(json):
+    return json["uf"]
