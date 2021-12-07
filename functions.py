@@ -1,33 +1,62 @@
-import json
-
 import requests
 
-URL = "https://viacep.com.br/ws/{}/json/"
-REGEX101 = r"\b\d{8}\b"
+brazilian_states = {
+    'AC': 'Acre',
+    'AL': 'Alagoas',
+    'AP': 'Amapá',
+    'AM': 'Amazonas',
+    'BA': 'Bahia',
+    'CE': 'Ceará',
+    'DF': 'Distrito Federal',
+    'ES': 'Espírito Santo',
+    'GO': 'Goiás',
+    'MA': 'Maranhão',
+    'MT': 'Mato Grosso',
+    'MS': 'Mato Grosso do Sul',
+    'MG': 'Minas Gerais',
+    'PA': 'Pará',
+    'PB': 'Paraíba',
+    'PR': 'Paraná',
+    'PE': 'Pernambuco',
+    'PI': 'Piauí',
+    'RJ': 'Rio de Janeiro',
+    'RN': 'Rio Grande do Norte',
+    'RS': 'Rio Grande do Sul',
+    'RO': 'Rondônia',
+    'RR': 'Roraima',
+    'SC': 'Santa Catarina',
+    'SP': 'São Paulo',
+    'SE': 'Sergipe',
+    'TO': 'Tocantins'
+}
 
 
-def get_response_via_cep(cep_number):
-    try:
-        response = requests.get(URL.format(cep_number))
-        if response.status_code == 200:
-            return response.text
-
-    except Exception as error:
-        print(error)
+def get_web_request_response(cep):
+    return requests.get(f"https://viacep.com.br/ws/{cep}/json/")
 
 
-def return_parsing_json(json_text):
-    parsing = json.loads(json_text)
-    return parsing
+def get_json(web_request_response):
+    return web_request_response.json()
 
 
-def returned_objects(parsing_response):
-    cep = parsing_response['cep']
-    address = parsing_response['logradouro']
-    district = parsing_response['bairro']
-    city = parsing_response['localidade']
-    state = parsing_response['uf']
-    return cep, address, district, city, state
+def get_cep_number(json):
+    return json["cep"]
+
+
+def get_street(json):
+    return json["logradouro"]
+
+
+def get_district(json):
+    return json["bairro"]
+
+
+def get_city(json):
+    return json["localidade"]
+
+
+def get_state(json):
+    return brazilian_states[json["uf"]]
 
 
 def validation_cep(cep_number):
