@@ -1,6 +1,10 @@
 import functions
 import classe
 
+import sys
+
 
 if __name__ == "__main__":
-    pass
+    app = classe.QApplication(sys.argv)
+    window = classe.MainWindow()
+    sys.exit(app.exec_())
