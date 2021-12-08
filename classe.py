@@ -12,6 +12,7 @@ class MainWindow(QMainWindow):
         #  Fonts
         self.Arial_Rounded_MT_Bold = functions.get_font("Arial Rounded MT Bold", 16)
         self.Bahnschrift_Light_SemiCondensed = functions.get_font("Bahnschrift Light SemiCondensed", 16)
+        self.DejaVu_Sans_Condensed = functions.get_font("DejaVu Sans Condensed", 14)
 
         #  Window settings
         self.setGeometry(350, 225, 400, 440)
@@ -59,6 +60,22 @@ class MainWindow(QMainWindow):
                                                           border-radius: 4; }
                                       QPushButton:hover { background-color: rgb(170, 255, 127) }""")
         self.search_button.setFont(self.Bahnschrift_Light_SemiCondensed)
+
+        #  Creation and configuration of labels that will be in the information frame
+        default_style = ("""QLabel { background-color: rgb(255, 255, 255);
+                                     border-color: rgb(0, 0, 0);
+                                     border-width: 0px;
+                                     border-style: solid;
+                                     border-radius: 0; }""")
+        self.street_label = functions.create_label(self.information_frame, 5, 5, 380, 55, default_style, self.DejaVu_Sans_Condensed, 5)
+        self.district_label = functions.create_label(self.information_frame, 5, 65, 380, 55, default_style, self.DejaVu_Sans_Condensed, 5)
+        self.city_label = functions.create_label(self.information_frame, 5, 125, 380, 55, default_style, self.DejaVu_Sans_Condensed, 5)
+        self.state_label = functions.create_label(self.information_frame, 5, 185, 380, 55, default_style, self.DejaVu_Sans_Condensed, 5)
+
+        self.street_label.setText("Rua: ")
+        self.district_label.setText("Bairro: ")
+        self.city_label.setText("Cidade: ")
+        self.state_label.setText("Estado: ")
 
         #  Show window
         self.show()
