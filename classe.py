@@ -77,5 +77,42 @@ class MainWindow(QMainWindow):
         self.city_label.setText("Cidade: ")
         self.state_label.setText("Estado: ")
 
+        #  Search button function setting
+        self.search_button.clicked.connect(self.update_labels)
+
         #  Show window
         self.show()
+
+    def get_cep_provided(self):
+
+        """Module that takes the value provided by the user"""
+
+        information_provided = self.cep_number.text()
+
+        return information_provided
+
+    @staticmethod
+    def search_cep(cep):
+
+        """Module that starts the search for information through the cep provided"""
+
+        web_request_response = functions.get_web_request_response(cep)
+        json = functions.get_json(web_request_response)
+        street = functions.get_street(json)
+        district = functions.get_district(json)
+        city = functions.get_city(json)
+        state = functions.get_state(json)
+        acronym = functions.get_acronym(json)
+
+        return street, district, city, state, acronym
+
+    def update_labels(self):
+
+        """Module that updates the information frame labels"""
+
+        cep = self.get_cep_provided()
+        street, district, city, state, acronym = self.search_cep(cep)
+        self.street_label.setText(f"Rua: {street}")
+        self.district_label.setText(f"Bairro: {district}")
+        self.city_label.setText(f"Cidade: {city}")
+        self.state_label.setText(f"Estado: {state} {acronym}")
