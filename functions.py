@@ -1,3 +1,4 @@
+import classe
 import requests
 
 brazilian_states = {
@@ -32,7 +33,7 @@ brazilian_states = {
 
 
 def get_web_request_response(cep):
-    return requests.get(f"https://viacep.com.br/ws/{cep}/json/")
+    return requests.get(f"https://viacep.com.br/ws/{str(cep)}/json/")
 
 
 def get_json(web_request_response):
@@ -61,3 +62,10 @@ def get_state(json):
 
 def get_acronym(json):
     return json["uf"]
+
+
+def get_font(font_name: str, font_size: int):
+    font = classe.QFont()
+    font.setFamily(font_name)
+    font.setPointSize(font_size)
+    return font
