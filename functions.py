@@ -69,3 +69,12 @@ def get_font(font_name: str, font_size: int):
     font.setFamily(font_name)
     font.setPointSize(font_size)
     return font
+
+
+def create_label(window, x: int, y: int, width: int, height: int, style: str = None, font=None, margin: int = None):
+    label = classe.QLabel(window)
+    label.setGeometry(x, y, width, height)
+    label.setStyleSheet(style)
+    label.setFont(font)
+    label.setMargin(margin)
+    return label
