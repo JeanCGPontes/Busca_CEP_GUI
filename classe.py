@@ -1,11 +1,11 @@
 import functions
 
-from PyQt5.QtWidgets import QMainWindow, QPushButton, QLabel, QFrame, QApplication, QLineEdit
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QLabel, QFrame, QApplication, QLineEdit, QWidget
 from PyQt5.QtGui import QIcon, QPixmap, QFont
 from PyQt5.QtCore import Qt
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, QWidget):
     def __init__(self):
         super().__init__()
 
@@ -39,6 +39,7 @@ class MainWindow(QMainWindow):
                                           border-radius: 4; }""")
         self.cep_number.setFont(self.Arial_Rounded_MT_Bold)
         self.cep_number.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.cep_number.returnPressed.connect(self.update_labels)
 
         #  Frame creation and configuration
         self.information_frame = QFrame(self)
